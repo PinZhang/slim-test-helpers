@@ -83,6 +83,11 @@ class WebTestClient
         $this->app->request = new Slim\Http\Request($env);
         $this->app->response = new Slim\Http\Response();
 
+        // FIXME hardcode the Authorization header
+        if (array_key_exists('Authorization', $optionalHeaders)) {
+            $this->app->request->headers->set('Authorization', $optionalHeaders['Authorization']);
+        }
+
         // Establish some useful references to the slim app properties
         $this->request  = $this->app->request();
         $this->response = $this->app->response();
